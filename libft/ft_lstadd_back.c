@@ -5,33 +5,36 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 16:56:21 by vfuster-          #+#    #+#             */
-/*   Updated: 2023/02/13 16:56:24 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 17:14:44 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 08:05:37 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_lstadd_back adds a new node to the back of a list:
-		[.]->[.]->[.]->[NEW]->[NULL]
-
-	RETURN VALUE :
-	None.
-*/
-
-void	ft_lstadd_back(t_list **alst, t_list *new)
+/* Ajoute un nouvel element a la fin d'une liste chainee
+ * Prend en entree un pointeur sur un pointeur t_list (adresse du pointeur
+ * sur le 1er element de la liste chainee) et un pointeur t_list pour
+ * le nouvel element a ajouter
+ * Si la liste existe la fonction definit un pointeur elem pour pointer
+ * sur le dernier element de la liste existante. Elle definit ensuite next
+ * du dernier element pour pointer sur le nouvel element ce qui ajoute ce 
+ * nouvel element a la fin de la liste
+ * Si la liste n'existe pas encore, la fonction definit *lst pour pointer
+ * sur le nouvel elememt 
+ * ce qui cree une nouvelle liste avec ce seul element
+ *
+ * */
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*tmp;
+	t_list	*elem;
 
-	if (!new)
-		return ;
-	if (!*alst)
+	if (lst != NULL && *lst != NULL)
 	{
-		*alst = new;
+		elem = *lst;
+		elem = ft_lstlast(*lst);
+		elem->next = new;
 		return ;
 	}
-	tmp = ft_lstlast(*alst);
-	tmp->next = new;
+	*lst = new;
 }

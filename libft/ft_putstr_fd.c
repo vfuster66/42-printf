@@ -5,29 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/28 05:42:28 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/13 17:03:53 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 17:19:18 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 08:42:07 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_putstr_fd writes the given string to the given
-	file descriptor.
-
-	RETURN VALUE :
-	None.
-*/
-
-void	ft_putstr_fd(char *s, int fd)
+/*Ecrit la chaine de caracteres sur le file descriptor specifie en 
+ * determinant la longueur de la chaine
+ * Si chaine = NULL, la fonction ne fait rien
+ *
+ * */
+void	ft_putstr_fd(char const *s, int fd)
 {
-	if (!s)
-		return ;
-	while (*s != '\0')
-	{
-		ft_putchar_fd(*s, fd);
-		s++;
-	}
+	if (s != NULL)
+		write(fd, s, ft_strlen(s));
 }

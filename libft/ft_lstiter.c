@@ -5,27 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 16:56:58 by vfuster-          #+#    #+#             */
-/*   Updated: 2023/02/13 16:57:01 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 17:16:21 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 08:06:19 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_lstiter applies the function f passed as parameter
-	to the content of each node of a given list.
-
-	RETURN VALUE :
-	None.
-*/
-
+/* 
+ * Permet d'appliquer une operation a chaque element de la liste en
+ * parcourant tous les elements de la liste lst et en executant la fonction f
+ * sur le contenu de chaque element
+ * Une boucle while parcourt la liste jusqu'a ce que l'element suivant 
+ * soit NULL. f est appele a chaque iteration avec le contenu de l'element
+ * courant. 
+ * Enfin l'element courant est ;is a jour pour etre l'element suivant
+ * dans la liste. La boucle s'arrete quand element suivant = NULL
+ *
+ * */
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	if (!f || !lst)
-		return ;
-	while (lst)
+	while (lst != NULL)
 	{
 		f(lst->content);
 		lst = lst->next;

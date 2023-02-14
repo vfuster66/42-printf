@@ -5,26 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 13:52:04 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/13 17:00:17 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 08:42:31 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 10:45:22 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_tolower converts a given uppercase letter c to its
-	lowercase equivalent.
-
-	RETURN VALUE :
-	The lowercase equivalent letter.
-	The original character c if c is not an uppercase letter.	
-*/
+/* verifie s'il s'agit d'une majuscule (ft_isupper)
+ * convertit en minuscule
+ *
+ **/
+static int	ft_isupper(int c)
+{
+	return (c >= 65 && c <= 90);
+}
 
 int	ft_tolower(int c)
 {
-	if (c >= 'A' && c <= 'Z')
-		c += 32;
+	if (ft_isupper(c))
+		return (c + 32);
 	return (c);
 }

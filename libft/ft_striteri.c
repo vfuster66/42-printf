@@ -5,32 +5,40 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/28 05:10:58 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/13 17:01:59 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 17:19:59 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 09:38:45 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_striteri applies the given function f to each
-	character in the given string s.
-
-	RETURN VALUE :
-	None.
-*/
-
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+/* Itere sur tous les caracteres d'une chaine de caracteres en passant
+ * leur index a une fonction donnee
+ * Verifie aue s et f ne sont pas nuls
+ * Calcule la longueur de s avec ft_strlen
+ * i stocke la longueur de la chaine et i2 sert de compteur
+ * La boucle itere sur tous les caracteres de la chaine
+ * A chaque iteration elle appelle (*f)(i2, s) ce qui passe i2 et le pointeur
+ * vers le caractere actuel a la fonction f
+ * Deplace s pour pointer vers le caractere suivant et incremente i2 pour
+ * passer a la prochaine iteration
+ *
+ **/
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	int	i;
+	unsigned int	i;
+	unsigned int	i2;
 
-	if (!s || !f)
-		return ;
 	i = 0;
-	while (s[i])
+	i2 = 0;
+	if (s != NULL || f != NULL)
 	{
-		(*f)(i, &s[i]);
-		i++;
+		i = ft_strlen(s);
+		while (i2 < i)
+		{
+			(*f)(i2, s);
+			s++;
+			i2++;
+		}
 	}
 }

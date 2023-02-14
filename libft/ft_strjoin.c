@@ -5,44 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/26 18:18:15 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/13 17:01:51 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 17:20:18 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 09:42:39 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_strjoin concatenates the given strings s1 and s2
-	and allocates sufficient memory for the newly created string.
-
-	RETURN VALUE :
-	A pointer to the new concatenated string.
-	NULL if the memory allocation fails.
-*/
-
+/* Concatene 2 chaines de caracteres s1 et s2
+ * Verifie si s1 et s2 sont nuls -> NULL dans ce cas
+ * Alloue de la memoire pour une nouvelle chaine qui contient s1 et s2
+ * Copie s2 dans la nouvelle chaine avec une boucle
+ * Retourne un pointeur vers la nouvelle chaine de caracteres qui doit
+ * etre liberee ulterieurement avec free pour eviter les fuites memoire
+ *
+ **/
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*s;
-	size_t	len;
 	int		i;
+	int		j;
+	char	*str;
 
-	len = ft_strlen(s1) + ft_strlen(s2);
-	s = ft_calloc(len + 1, sizeof(char));
-	if (!s)
-		return (NULL);
-	len = 0;
-	while (s1[len])
-	{
-		s[len] = s1[len];
-		len++;
-	}
 	i = 0;
-	while (s2[i])
+	j = 0;
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (str == NULL)
+		return (NULL);
+	while (s1[i])
 	{
-		s[len + i] = s2[i];
+		str[i] = s1[i];
 		i++;
 	}
-	return (s);
+	while (s2[j])
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
 }

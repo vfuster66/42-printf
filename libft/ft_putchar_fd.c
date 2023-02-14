@@ -5,22 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/28 05:38:33 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/13 17:04:18 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 17:18:16 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 08:30:50 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_putchar_fd writes the given character to the given
-	file descriptor.
-
-	RETURN VALUE :
-	None.
-*/
-
+/*Permet d'ecrire un caractere sur un file descriptor
+ * Utilise write qui permet d'ecrire des donnees dans un file descriptor
+ *
+ * */
 void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);

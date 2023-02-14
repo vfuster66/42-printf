@@ -5,42 +5,43 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/26 16:50:44 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/13 17:00:14 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/03 10:16:49 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 10:55:56 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_substr extracts a substring from the given string by
-	allocating sufficient memory for the new string starting at index start
-	and ending at len characters.
-
-	RETURN VALUE :
-	A pointer to the new string.
-	NULL if the memory allocation fails.
-*/
-
+/* Verifie si s est nulle -> NULL dans ce cas
+ * Verifie si la longueur de s < longueur de start -> chaine vide dans ce cas
+ * Alloue de la memoire pour chaine de taille len + 1 pour accueillir la 
+ * sous chaine
+ * Boucle qui copie les caracteres de s a partir de start
+ * Renvoie le pointeur vers la nouvelle chaine
+ *
+ **/
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*res;
-	char	*src;
-	size_t	reslen;
+	char	*str;
+	size_t	count;
+	size_t	size;
 
 	if (!s)
 		return (NULL);
-	if (ft_strlen(s) < (size_t)start)
+	if ((unsigned int)ft_strlen(s) < start)
 		return (ft_strdup(""));
-	src = (char *)s + start;
-	if (ft_strlen(src) < len)
-		reslen = ft_strlen(src) + 1;
-	else
-		reslen = len + 1;
-	res = malloc(reslen * sizeof(char));
-	if (!res)
+	size = ft_strlen(s + start);
+	if (size < len)
+		len = size;
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
 		return (NULL);
-	ft_strlcpy(res, src, reslen);
-	return (res);
+	count = 0;
+	while (count < len)
+	{
+		str[count] = s[start + count];
+		count ++;
+	}
+	str[count] = '\0';
+	return (str);
 }

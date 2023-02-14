@@ -3,43 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
+/*   By: vfuster- <vfuster-@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/28 04:35:39 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/13 17:01:04 by vfuster-         ###   ########.fr       */
+/*   Created: 2022/12/22 11:31:02 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 10:55:31 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESRIPTION :
-	The function ft_strmapi applies the given function f to each character
-	in the given string s and allocates sufficient memory to store the
-	resulting new string. 
-
-	RETURN VALUE :
-	A pointer to the newly created string. NULL if the memory allocation
-	fails.	
-*/
-
+/* Transforme les caracteres d'une chaine en utilisant la fonction de rappel f
+ * Verifie si s est nulle -> NULL dans ce cas
+ * Alloue de la memoire pour une nouvelle chaine de taille ft_strlen(s) + 1
+ * Boucle pour iterer a travers s en appelant f pour chaque caractere et
+ * en remplacant le caractere correspondant dans la nouvelle chaine
+ * Renvoie le pointeur vers la nouvelle chaine
+ *
+ **/
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char			*str;
 	unsigned int	i;
+	char			*str;
 
-	if (!s || (!s && !f))
-		return (ft_strdup(""));
-	else if (!f)
-		return (ft_strdup(s));
-	str = ft_strdup(s);
-	if (!str)
+	if (!s)
 		return (NULL);
 	i = 0;
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s)) + 1);
+	if (str == NULL)
+		return (NULL);
 	while (s[i])
 	{
-		str[i] = (*f)(i, s[i]);
+		str[i] = f(i, s[i]);
 		i++;
 	}
+	str[i] = '\0';
 	return (str);
 }

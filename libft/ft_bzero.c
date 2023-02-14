@@ -5,31 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 16:54:40 by vfuster-          #+#    #+#             */
-/*   Updated: 2023/02/13 16:54:42 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/01 15:31:52 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 08:03:06 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_bzero erases data in the n bytes of memory starting
-	at location s by writing '\0's.
-
-	RETURN VALUE :
-	None.
-*/
-
+/*  prend en entree un pointeur s sur un espace memoire et une taille n
+ *  en octet
+ *  Initialise a 0 n octets de l espace memoire en utilisant un pointeur 
+ *  de type unsigned char
+ *  La boucle while parcourt l'espace memoire et met a 0 chaque octet 
+ *  jusqu'a ce que i atteigne n.
+ *
+ *  */
 void	ft_bzero(void *s, size_t n)
 {
-	unsigned char	*p;
+	unsigned char	*dest;
+	size_t			i;
 
-	p = (unsigned char *)s;
-	while (n != 0)
-	{
-		*p = '\0';
-		p++;
-		n--;
-	}
+	dest = s;
+	i = 0;
+	while (i++ < n)
+		*dest++ = 0;
 }

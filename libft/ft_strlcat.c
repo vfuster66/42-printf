@@ -5,45 +5,39 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 15:14:19 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/13 17:01:43 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 07:57:11 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 10:47:10 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_strlcat appends the given string src to the end of 
-	dst. It will append at most dstsize - ft_strlen(dst) - 1 and 
-	nul-terminate the result.
-
-	Note : space for the terminating \0 character must be included in dstsize.
-
-	RETURN VALUE :
-	The total length of the string that it tried to create : the initial
-	length of dst + the length of src, with the goal to facilitate
-	truncaction detection.
-*/
-
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+/* Concatene 2 chaines de caracteres
+ * Verifie si src est vde ou si la taille est nulle -> longueur de src
+ * Calcule la longueur de dst en parcourantles caracteres jusqu'a la fin
+ * de dst ou size
+ * Copie tout ou partie de src a la fin de dst en veillant a ne pas 
+ * depasser size de la memoire allouee pour dst
+ * Retourne la longueur totale de la chaine obtenue
+ *
+ **/
+size_t	ft_strlcat(char *dst, char const *src, size_t size)
 {
 	size_t	i;
 	size_t	j;
-	size_t	d_size;
-	size_t	s_size;
 
-	d_size = ft_strlen(dst);
-	s_size = ft_strlen(src);
-	if (dstsize <= d_size)
-		return (dstsize + s_size);
-	i = d_size;
-	j = 0;
-	while ((i + j) < (dstsize - 1) && src[j] != '\0')
+	if (!src || !size)
+		return (ft_strlen(src));
+	i = 0;
+	while (dst[i] && i < size)
+		i++;
+	j = i;
+	while (src[i - j] && i < size - 1)
 	{
-		dst[i + j] = src[j];
-		j++;
+		dst[i] = src[i - j];
+		i++;
 	}
-	dst[i + j] = '\0';
-	return (d_size + s_size);
+	if (j < size)
+		dst[i] = '\0';
+	return (j + ft_strlen(src));
 }

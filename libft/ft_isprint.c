@@ -5,22 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 16:55:58 by vfuster-          #+#    #+#             */
-/*   Updated: 2023/02/13 16:56:01 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 17:13:51 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 08:04:53 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-	DESCRIPTION :
-	The function ft_isprint checks whether c is a printable character or not.
+#include "libft.h"
 
-	RETURN VALUE :
-	Non-zero if c is printable, zero if not.
-*/
-
+/* booleen indiquant si le caractere passe en argument est un
+ * caractere imprimable. Renvoie 1 si vrai, 0 si faux 
+ *
+ * */
 int	ft_isprint(int c)
 {
-	if (c >= ' ' && c <= '~')
-		return (c);
-	return (0);
+	return (c >= 32 && c <= 126);
 }

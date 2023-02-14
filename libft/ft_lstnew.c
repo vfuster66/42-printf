@@ -5,23 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 16:57:25 by vfuster-          #+#    #+#             */
-/*   Updated: 2023/02/13 16:57:26 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 17:17:15 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 08:07:28 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_lstnew allocates memory for a new list node and 
-	initializes its content to the value passed as parameter, before
-	setting its next node to NULL. 
-
-	RESULT VALUE :
-	The new list ode.
-*/
-
+/* Alloue de la memoire pour un nouveau maillon de liste chainee et 
+ * initialise ses champs avec les valeurs passees en arg
+ * L'arg content est un pointeur vers un objet qui sera stocke dans
+ * le nouveau maillon
+ * Si l'allocation memoire reussit, initialise les champs du nouveau maillon
+ * Content avec valeur content -> pointeur vers le contenu a stocker
+ * next = NULL -> maillon ne pointe vers aucun autre mailon
+ * Retourne  un pointeur vers le nouveau maillon ou NULL si echec
+ *
+ * */
 t_list	*ft_lstnew(void *content)
 {
 	t_list	*list;

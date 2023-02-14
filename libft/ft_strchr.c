@@ -5,40 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 13:53:33 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/13 17:03:38 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 08:48:40 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 09:25:04 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_strchr finds the first occurence of character c in
-	string str.
-
-	RETURN VALUE :
-	A pointer to the first occurence of c in str.
-	NULL if c is not found.
-*/
-
-char	*ft_strchr(const char *str, int c)
+/* Cherche un caractere c dans une chaine de caracteres s
+ * Renvoie un pointeur vers la 1ere occurence de c dans s
+ * Ou renvoie nul si c non trouve
+ * Parcourt s caractere par caractere jusqu'a ce qu'elle trouve c
+ * ou qu'elle atteigne la fin de la chaine
+ *
+ * */
+char	*ft_strchr(char const *s, int c)
 {
-	int				i;
-	unsigned char	ch;
+	char	find;
+	int		i;
 
+	find = (unsigned char)c;
 	i = 0;
-	ch = c;
-	if (ch == '\0')
+	while (s[i])
 	{
-		i = ft_strlen(str);
-		return ((char *)str + i++);
-	}
-	while (str[i])
-	{
-		if (str[i] == ch)
-			return ((char *)str + i);
+		if (s[i] == find)
+			return ((char *)s + i);
 		i++;
 	}
-	return (NULL);
+	if (s[i] == find)
+		return ((char *)s + i);
+	return (0);
 }

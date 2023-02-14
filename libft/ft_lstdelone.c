@@ -5,27 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 16:56:50 by vfuster-          #+#    #+#             */
-/*   Updated: 2023/02/13 16:56:53 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 17:15:54 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 08:06:09 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_lstdelone deletes the content of a list node with the
-	function passed as parameter before freeing the memory of the node.
-
-	RETURN VALUE :
-	None.
-*/
-
+/* Permet de supprimer un element d'une liste chainee 
+ * lst = pointeur sur element a supprimer
+ * del = fonction appelee pour liberer la memoire associee a l'element
+ * La fonction appelle del avec le pointeur sur le contenu de l'element
+ * afin de liberer la memoire associee au contenu
+ * Ensuite la fonction libere la memoire associe a l'element lui-meme
+ * Enfin l'element est mis a NULL pour eviter les fuites memoire
+ *
+ * */
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	if (!lst)
+	if (!lst || !del)
 		return ;
-	if (del)
-		(del)(lst->content);
+	del(lst->content);
 	free(lst);
+	lst = NULL;
 }

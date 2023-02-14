@@ -5,34 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 13:48:14 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/13 17:04:25 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 09:54:25 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 08:29:14 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_memset fills the first len bytes of the memory area
-	pointed	to by b with the byte c. Both b and c are interpreted as 
-	unsigned char.
-
-	RETURN VALUE :
-	A pointer to memory area s.
-*/
-
-void	*ft_memset(void *b, int c, size_t len)
+/* Remplit une zone memoire avec un caractere donne
+ * s pointeur vers la zone memoire a remplir, c caractere utilise pour 
+ * remplir la memoire, n taille en octets de la zone a remplir
+ * Utilise une boucle pour iterer n fois et remplir la memoire avec src
+ * a chaque iteration.
+ * Renvoie s une fois la memoire remplie
+ *
+ * */
+void	*ft_memset(void *s, int c, size_t n)
 {
-	unsigned char	*p;
-	unsigned char	ch;
+	unsigned char	*new_dest;
+	unsigned char	src;
+	size_t			i;
 
-	p = (unsigned char *)b;
-	ch = c;
-	while (len--)
-	{
-		*p = ch;
-		p++;
-	}
-	return (b);
+	i = 0;
+	new_dest = s;
+	src = c;
+	while (i++ < n)
+		*new_dest++ = src;
+	return (s);
 }

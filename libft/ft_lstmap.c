@@ -5,49 +5,54 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 16:57:15 by vfuster-          #+#    #+#             */
-/*   Updated: 2023/02/13 16:57:17 by vfuster-         ###   ########.fr       */
+/*   Created: 2022/12/22 11:22:56 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 08:06:57 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_lstmap creates a new list from a given list  by 
-	applying the function passed as parameter to the original list. If
-	the memory allocation fails for any node in the new list, the new list
-	will be deleted with the function passed as parameter and its memory
-	will be freed.
-
-	RETURN VALUE :
-	The new list containing the new values if a functon was provided.
-	A new copy of the list if no function was provided.
-	NULL if the memory allocation failed.
-*/
-
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+/* Parcourt une liste chainee en executant une fonction sur chaque element 
+ * de la liste et en renvoyant une nouvelle liste chainee avec les 
+ * nouveaux elements retournes par f
+ * Verifie si lst et f et del sont non nuls. Si l'un d'entre eux est nul
+ * la fonction renvoie NULL
+ * Cree une nouvelle liste out en utilisant ft_lstnew avec le 1er arg nul
+ * Si out ne peut pas etre cree -> NULL
+ * Definit elem = out puis boucle chaque element de lst et traite chaque
+ * element avec f
+ * Si element suivant existe cree un nouvel element en utilisant ft_lstnew
+ * avec le 1er arg nul. Si ne peut pas etre cree ft_lstclear detruit out et
+ * renvoie NULL
+ * Si elem suivant n'existe pas, passe au prochain element de la liste
+ * Renvoie la nouvelle liste out une fois tous les elements traites
+ *
+ **/
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void*))
 {
-	t_list	*newlst;
-	t_list	*node;
+	t_list	*out;
+	t_list	*elem;
 
-	if (!lst)
+	if (!lst || !f || !del)
 		return (NULL);
-	newlst = NULL;
-	node = NULL;
+	out = ft_lstnew(NULL);
+	if (!out)
+		return (NULL);
+	elem = out;
 	while (lst)
 	{
-		if (!f)
-			node = ft_lstnew(lst->content);
-		else
-			node = ft_lstnew(f(lst->content));
-		if (!node)
+		elem->content = (*f)(lst->content);
+		if (lst->next)
 		{
-			ft_lstclear(&newlst, del);
-			return (NULL);
+			elem->next = ft_lstnew(NULL);
+			if (!elem->next)
+			{
+				ft_lstclear(&out, del);
+				return (NULL);
+			}
+			elem = elem->next;
 		}
-		ft_lstadd_back(&newlst, node);
 		lst = lst->next;
 	}
-	return (newlst);
+	return (out);
 }

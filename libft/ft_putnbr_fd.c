@@ -5,37 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/28 06:22:02 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/13 17:04:03 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 17:18:50 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 08:39:31 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_putnbr_fd writes the given integer n on the given
-	file descriptor by converting it into char.
-
-	RETURN VALUE :
-	None.
-*/
-
+/*Affiche un entier sur la sortie standard associee au file descriptor
+ * Definit une variable nb utilisee pour afficher la valeur absolue de n
+ * Ensuite utilise une recursion pour afficher les chiffres de nb
+ * Une fois la recursion terminee elle ecrit nb en convertissant ce 
+ * chiffre en caractere
+ *
+ * */
 void	ft_putnbr_fd(int n, int fd)
 {
-	long	nbr;
+	unsigned int	nb;
 
-	nbr = n;
-	if (nbr < 0)
+	if (n < 0)
 	{
 		ft_putchar_fd('-', fd);
-		nbr = -nbr;
-	}
-	if (nbr >= 10)
-	{
-		ft_putnbr_fd(nbr / 10, fd);
-		ft_putchar_fd((nbr % 10) + '0', fd);
+		nb = (unsigned int)(n * -1);
 	}
 	else
-		ft_putchar_fd(nbr + '0', fd);
+		nb = (unsigned int)n;
+	if (nb >= 10)
+		ft_putnbr_fd(nb / 10, fd);
+	ft_putchar_fd((char)(nb % 10 + 48), fd);
 }

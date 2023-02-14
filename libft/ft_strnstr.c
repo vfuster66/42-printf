@@ -5,44 +5,45 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/25 23:07:33 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/13 17:00:40 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 11:41:19 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 10:53:16 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_strnstr searches the first n bytes of the given string
-	s1 for the first occurence of the full string s2.
-	Characters that appear after \0 are not searched.
-
-	RETURN VALUE :
-	A pointer to the first character of the first occurrence of s2.
-	A pointer to s1 if s2 is empty.
-	NULL if s2 occurs nowhere in s1.
-*/
-
-char	*ft_strnstr(const char *s1, const char *s2, size_t n)
+/* Cherche la 1ere occurence d'une chaine little dans une autre chaine big
+ * Double boucle pour comparer les caracteres des 2 boucles
+ * 1ere boucle (i) parcourt les len 1ers caracteres de big
+ * 2eme boucle (j) compare les caracteres de little avec les caracteres
+ * correspondant a big
+ * Si un caractere ne correspond pas la 2eme boucle s'arrete et la 1ere
+ * boucle passe au prochain caractere de big
+ * Si tous les caracteres de little correspondent la fonction renvoie
+ * un pointeur vers le 1er caractere correspondant dans big
+ *
+ **/
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	size_t	s2len;
-	size_t	i;
-	size_t	j;
+	size_t		i;
+	size_t		j;
 
-	s2len = ft_strlen(s2);
-	if (s1 == s2 || s2len == 0)
-		return ((char *)s1);
+	if (!*little)
+		return ((char *)big);
+	if (!len)
+		return (0);
 	i = 0;
-	while (i < n && s1[i] != '\0')
+	while (big[i] && i < len)
 	{
 		j = 0;
-		while (s1[i + j] != '\0' && s2[j] != '\0'
-			&& (i + j) < n && s1[i + j] == s2[j])
+		if (big[i] == little[j])
 		{
-			j++;
-			if ((j == n && j == s2len) || j == s2len)
-				return ((char *)(s1 + i));
+			while (i + j < len && big[i + j] == little[j])
+			{
+				j++;
+				if (!little[j])
+					return ((char *)&big[i]);
+			}
 		}
 		i++;
 	}

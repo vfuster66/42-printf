@@ -5,40 +5,39 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 15:50:46 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/13 17:00:32 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 09:03:48 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 10:52:44 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_strrchr finds the last occurrence of character c in
-	string str.
-
-	RETURN VALUE :
-	A pointer to the last occurrence of c in str.
-	NULL if c is not found.
-*/
-
-char	*ft_strrchr(const char *str, int c)
+/* Definit un pointeur last sur le debut de s. 
+ * Convertit l'entier c en caractere find
+ * Calcule la longueur de s
+ * Boucle pour parcourir s de la fin vers le debut 
+ * Si last[i] correspond a find retourne un pointeur  sur la position
+ * actuelle dans s. Sinon decremente i a chaque boucle
+ * Si c a la premiere position de s, retourne last. Sinon retourne 0 si
+ * c n'a pas ete trouve
+ * 
+ **/
+char	*ft_strrchr(char const *s, int c)
 {
-	char			*p;
-	unsigned char	ch;
-	size_t			offset;
+	char	*last;
+	char	find;
+	int		i;
 
-	ch = c;
-	offset = ft_strlen(str);
-	p = (char *)str + offset;
-	if (ch == '\0')
-		return (p++);
-	while (p >= str)
+	last = (char *)s;
+	find = (char)c;
+	i = ft_strlen(s);
+	while (i > 0)
 	{
-		if (*p == ch)
-			return (p);
-		p--;
+		if (last[i] == find)
+			return (last + i);
+		i--;
 	}
-	p = NULL;
-	return (p);
+	if (last[i] == find)
+		return (last);
+	return (0);
 }

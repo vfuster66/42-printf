@@ -5,74 +5,78 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 16:56:10 by vfuster-          #+#    #+#             */
-/*   Updated: 2023/02/13 16:56:13 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 17:14:28 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 08:05:05 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_itoa converts the integer n into a string of characters.
-
-	RESULT VALUE :
-	The string of the converted integer.
-*/
-
-static size_t	ft_itoa_len(long num)
+/* fonction qui convertit un entier en chaine de caracteres
+ *
+ * get_size determine la longueur de la chaine de caracteres en calculant
+ * le nombre de chiffres necessaires pour representer l'entier 
+ *
+ * fill_res remplit la chaine de caracters avec les chiffres de l'entier
+ * en utilisant le modulo et la division pour extraire les chiffre 
+ * un par un de gauche a droite
+ *
+ * itoa alloue de la memoire pour la chaine de caracteres resultante
+ * gere les cas speciaux (entier negatif) et remplit la chaine de 
+ * caracteres avec fill_res.
+ * Retourne la chaine de caracteres 
+ *
+ * */
+static int	get_size(int n)
 {
-	size_t	len;
+	int	size;
 
-	len = 0;
-	if (num == 0)
-		return (1);
-	if (num < 0)
+	size = 0;
+	if (n <= 0)
+		size++;
+	while (n != 0)
 	{
-		len++;
-		num = -num;
+		n = n / 10;
+		size++;
 	}
-	while (num >= 1)
-	{
-		len++;
-		num /= 10;
-	}
-	return (len);
+	return (size);
 }
 
-static char	*ft_num_to_str(long num, char *str, size_t len)
+static void	fill_res(int size, int offset, int n, char *res)
 {
-	str = ft_calloc(len + 1, sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	if (num < 0)
+	while (size > offset)
 	{
-		str[0] = '-';
-		num = -num;
+		res[size - 1] = n % 10 + '0';
+		n = n / 10;
+		size --;
 	}
-	len--;
-	while (len)
-	{
-		str[len] = (num % 10) + '0';
-		num /= 10;
-		len--;
-	}
-	if (str[0] != '-')
-		str[0] = (num % 10) + '0';
-	return (str);
 }
 
 char	*ft_itoa(int n)
 {
-	long	num;
-	size_t	len;
-	char	*str;
+	int		offset;
+	int		size;
+	char	*res;
 
-	num = n;
-	len = ft_itoa_len(num);
-	str = 0;
-	str = ft_num_to_str(num, str, len);
-	if (!str)
-		return (NULL);
-	return (str);
+	offset = 0;
+	size = get_size(n);
+	res = (char *)malloc(sizeof(char) * size + 1);
+	if (!res)
+		return (0);
+	if (n == -2147483648)
+	{
+		res[0] = '-';
+		res[1] = '2';
+		n = 147483648;
+		offset = 2;
+	}
+	if (n < 0)
+	{
+		res[0] = '-';
+		offset = 1;
+		n = -n;
+	}
+	fill_res(size, offset, n, res);
+	res[size] = '\0';
+	return (res);
 }

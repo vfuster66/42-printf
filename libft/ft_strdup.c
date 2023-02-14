@@ -5,31 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/26 16:03:27 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/13 17:02:07 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 17:19:42 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 09:29:40 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_strdup duplicates the given string s1 by allocating 
-	memory and performing a copy of the given string.
-
-	RETURN VALUE :
-	A pointer to the new string. NULL if the memory allocation fails.
-*/
-
-char	*ft_strdup(const char *s1)
+/* Duplique une chaine de caracteres
+ * Alloue de la memoire pour une nouvelle chaine de caracteres de la 
+ * meme longueur que s + \0 (ft_strlen)
+ * Si l'allocation echoue -> NULL
+ * Boucle utilisee pour copier les caracteres de s dans str. Boucle terminee
+ * lorsqu'elle rencontre \0 de s
+ * Ajoute \0 a la fin de la nouvelle chaine
+ * Renvoie un pointeur vers le debut de la nouvelle chaine
+ *
+ * */
+char	*ft_strdup(char const *s)
 {
-	char	*s2;
-	size_t	len;
+	char	*str;
+	size_t	n;
 
-	len = ft_strlen(s1) + 1;
-	s2 = malloc(len * sizeof(char));
-	if (!s2)
+	n = 0;
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (str == NULL)
 		return (NULL);
-	ft_strlcpy(s2, s1, len);
-	return (s2);
+	while (s[n])
+	{
+		str[n] = s[n];
+		n++;
+	}
+	str[n] = '\0';
+	return (str);
 }

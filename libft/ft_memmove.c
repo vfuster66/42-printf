@@ -5,45 +5,40 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 15:57:19 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/13 17:04:35 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 09:54:14 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 08:26:15 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_memmove copies n bytes from memory area src to memory
-	area dst. The memory areas may overlap: if the dst pointer is found
-	to be between the src pointer and the index n, copying will be done
-	back to front to prevent data being modified before being copied.
-	Otherwise it will be done front to back	to preserve data.
-
-	RETURN VALUE :
-	A pointer to dst.
-*/
-
-void	*ft_memmove(void *dst, const void *src, size_t len)
+/* Copie n octets de src vers dest. Peut gerer les cas ou la src et la
+ * dest se chevauchent
+ * Si dest < src copie en commencant du 1er au dernier octet
+ * Si dest > src copie en commencant du dernier au 1er octet
+ * Retourne un pointeur vers dest
+ *
+ * */
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char		*dp;
-	const char	*sp;
+	unsigned char	*new_dest;
+	unsigned char	*new_src;
 
-	if (src == dst)
-		return (dst);
-	dp = (char *)dst;
-	sp = (const char *)src;
-	if (sp < dp && sp + len > dp)
-		while (len--)
-			*(dp + len) = *(sp + len);
+	if (dest == src || n == 0)
+		return (dest);
+	if (dest < src)
+	{
+		new_dest = (unsigned char *)dest;
+		new_src = (unsigned char *)src;
+		while (n--)
+			*new_dest++ = *new_src++;
+	}
 	else
 	{
-		while (len--)
-		{
-			*dp = *sp;
-			sp++;
-			dp++;
-		}
+		new_dest = (unsigned char *)dest + (n - 1);
+		new_src = (unsigned char *)src + (n - 1);
+		while (n--)
+			*new_dest-- = *new_src--;
 	}
-	return (dst);
+	return (dest);
 }

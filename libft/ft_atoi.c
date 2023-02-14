@@ -5,45 +5,51 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 16:54:32 by vfuster-          #+#    #+#             */
-/*   Updated: 2023/02/13 16:54:34 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 12:15:39 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 08:01:41 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_atoi converts a string into an int.
-
-	RETURN VALUE :
-	The converted int.
-*/
-
-int	ft_atoi(const char *str)
+/*fonction qui convertit une chaine de caracteres en un nombre entier
+ * i = parcourt la chaine de caractere
+ * sign = stocke le signe du nombre
+ * number = stocke le nombre converti
+ * on utilise une boucle pour sauter tous les espaces blancs 
+ * et les caracteres de controle au debut de la chaine
+ * ensuite, si le 1er caractere est - le signe est negatif 
+ * et i est incremente pour ignorer le -. Si + i est simplement incremente
+ * enfin une boucle while permet de convertir les caracteres restants 
+ * en nombre entier. On verifie si chaque caractere est un chiffre.
+ * Si c'est le cas, il est converti en nombre et ajoute au nombre total
+ * qui est ensuite multiplie par 10.
+ * lorsque la boucle s'arrete, le nombre total est multiplie par le signe 
+ * et renvoye en tant que valeur de retour de la fonction
+ *
+ * */
+int	ft_atoi(char const *nptr)
 {
-	int	num;
-	int	isneg;
-	int	i;
+	int		i;
+	long	number;
+	long	sign;
 
-	num = 0;
-	isneg = 1;
 	i = 0;
-	while (str[i] && (str[i] == ' ' || str[i] == '\t'
-			|| str[i] == '\n' || str[i] == '\r'
-			|| str[i] == '\v' || str[i] == '\f'))
+	sign = 1;
+	number = 0;
+	while (nptr[i] == ' ' || ((9 <= nptr[i]) && (nptr[i] <= 13)))
 		i++;
-	if (str[i] == '+')
-		i++;
-	else if (str[i] == '-')
+	if (nptr[i] == '-')
 	{
-		isneg *= -1;
+		sign = -1;
 		i++;
 	}
-	while (ft_isdigit(str[i]))
+	else if (nptr[i] == '+')
+		i++;
+	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		num = (num * 10) + (str[i] - '0');
+		number = number * 10 + nptr[i] - '0';
 		i++;
 	}
-	return (num * isneg);
+	return (number * sign);
 }

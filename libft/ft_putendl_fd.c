@@ -5,24 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/28 06:13:20 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/13 17:04:11 by vfuster-         ###   ########.fr       */
+/*   Created: 2023/02/02 17:18:30 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/08 08:33:55 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	DESCRIPTION :
-	The function ft_putendl_fd writes the given string to the given
-	file descriptor followed by a new line.
-
-	RETURN VALUE :
-	None.
-*/
-
-void	ft_putendl_fd(char *s, int fd)
+/*Verifie d'abord si la chaine de caracteres est non nulle
+ * Si fonction nulle -> la fonction s'arrete
+ * Si fonction non nulle, elle appelle ft_putstr_fd puis ft_putchar_fd
+ * Sert a ecrire la chaine de caracteres s dans le fils descriptor fd
+ * suivie d'un retour a la ligne
+ *
+ * */
+void	ft_putendl_fd(char const *s, int fd)
 {
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
+	if (s != NULL)
+	{
+		ft_putstr_fd(s, fd);
+		ft_putchar_fd('\n', fd);
+	}
 }
