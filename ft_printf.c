@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vfuster- <vfuster-@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 13:21:32 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/01/27 17:31:12 by mcombeau         ###   ########.fr       */
+/*   Created: 2023/02/13 16:51:26 by vfuster-          #+#    #+#             */
+/*   Updated: 2023/02/14 07:41:19 by vfuster-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	ft_parse_flags(const char *str, int i, va_list args, t_flags *flags)
 	}
 	return (i);
 }
-
+/*
 #if defined(__linux__) || defined(__gnu_linux__)
 
 int	ft_parse(char *str, va_list args)
@@ -96,6 +96,7 @@ int	ft_parse(char *str, va_list args)
 }
 
 #else
+*/
 
 int	ft_parse(char *str, va_list args)
 {
@@ -122,7 +123,7 @@ int	ft_parse(char *str, va_list args)
 	return (count);
 }
 
-#endif
+//#endif
 
 int	ft_printf(const char *format, ...)
 {
