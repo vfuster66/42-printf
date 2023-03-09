@@ -6,7 +6,6 @@ Ce projet est assez direct. Vous devez recoder printf().
 Vous devez gérer les conversions suivantes : cspdiuxX%
 
 BONUS
-
 Gérez toute combinaison des drapeaux suivants : ’-0.’ ainsi que la largeur mini-
 male du champ avec toutes les conversions.
 Gérez tous les drapeaux suivants : ’# +’ (Oui, l’espace est un drapeau valide)
