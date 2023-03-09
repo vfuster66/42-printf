@@ -18,7 +18,7 @@ FONCTIONS VARIADIQUES
 BONUS
 * Gérez toute combinaison des drapeaux suivants : ’-0.’ ainsi que la largeur mini-
 male du champ avec toutes les conversions.
-Gérez tous les drapeaux suivants : ’# +’ (Oui, l’espace est un drapeau valide)
+* Gérez tous les drapeaux suivants : ’# +’ (Oui, l’espace est un drapeau valide)
 
 1 - Conversions
 ![Conversions](https://user-images.githubusercontent.com/124174795/222455177-d2a168ee-5872-49d5-8c09-2cbb25f4e3da.png)
