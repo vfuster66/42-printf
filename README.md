@@ -5,6 +5,12 @@ Parce que ft_putnbr() et ft_putstr(), c’est pas assez !!
 Ce projet est assez direct. Vous devez recoder printf().
 Vous devez gérer les conversions suivantes : cspdiuxX%
 
+FONCTIONS VARIADIQUES
+https://x0r.fr/blog/31
+![fonctions variadiques](https://user-images.githubusercontent.com/124174795/223967435-688636b9-c42b-4f4b-9540-b92f7805f86e.png)
+
+
+
 BONUS
 Gérez toute combinaison des drapeaux suivants : ’-0.’ ainsi que la largeur mini-
 male du champ avec toutes les conversions.
