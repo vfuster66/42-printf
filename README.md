@@ -10,6 +10,7 @@ GENERALITES
 
 FONCTIONS VARIADIQUES
 * https://x0r.fr/blog/31
+
 ![fonctions variadiques](https://user-images.githubusercontent.com/124174795/223967435-688636b9-c42b-4f4b-9540-b92f7805f86e.png)
 
 
