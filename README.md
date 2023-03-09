@@ -6,10 +6,10 @@ Ce projet est assez direct. Vous devez recoder printf().
 Vous devez gérer les conversions suivantes : cspdiuxX%
 
 GENERALITES
-https://learn.microsoft.com/fr-fr/cpp/c-runtime-library/format-specification-syntax-printf-and-wprintf-functions?view=msvc-170
+* https://learn.microsoft.com/fr-fr/cpp/c-runtime-library/format-specification-syntax-printf-and-wprintf-functions?view=msvc-170
 
 FONCTIONS VARIADIQUES
-https://x0r.fr/blog/31
+* https://x0r.fr/blog/31
 ![fonctions variadiques](https://user-images.githubusercontent.com/124174795/223967435-688636b9-c42b-4f4b-9540-b92f7805f86e.png)
 
 
