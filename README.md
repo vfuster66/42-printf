@@ -1,5 +1,8 @@
 # printf
 
+![100](https://user-images.githubusercontent.com/124174795/224285257-568daa9c-a93b-467b-8c57-77a409537244.png)
+
+
 Parce que ft_putnbr() et ft_putstr(), c’est pas assez !!
 
 Ce projet est assez direct. Vous devez recoder printf().
